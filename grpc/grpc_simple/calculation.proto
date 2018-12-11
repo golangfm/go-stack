@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package grpc.simple;
+
+message CalReq {
+    int32 valx = 1;
+    int32 valy = 2;
+    string op = 3;
+}
+
+message CalRes {
+    int32 result = 1;
+}
+
+service Calc {
+    rpc Calc(CalReq) returns (CalRes) {}
+}
