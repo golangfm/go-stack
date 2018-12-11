@@ -1,0 +1,17 @@
+syntax = "proto2";
+//protoc --go_out=plugins=grpc:. calc.proto
+
+package server.side.stream;
+
+message CalReq {
+    required int32 valx = 1;
+    required int32 valy = 2;
+}
+
+message CalRes {
+    required int32 result = 1;
+}
+
+service Calc {
+    rpc Calcs(CalReq) returns (stream CalRes) {}
+}
