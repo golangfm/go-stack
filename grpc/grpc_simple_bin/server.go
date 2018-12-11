@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 
+	"github.com/golangfm/go-stack/grpc/grpc_simple"
 	"google.golang.org/grpc"
 )
 
