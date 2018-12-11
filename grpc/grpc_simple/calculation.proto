@@ -5,7 +5,7 @@ package grpc.simple;
 message CalReq {
     required int32 valx = 1;
     required int32 valy = 2;
-    required int32 op = 3;
+    required string op = 3;
 }
 
 message CalRes {
