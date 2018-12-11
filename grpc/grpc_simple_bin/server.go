@@ -15,7 +15,7 @@ func main() {
 		return
 	}
 	grpcServer := grpc.NewServer()
-	grpc_simple.RegisterCalcServer(grpcServer, &SimpleCalcServer{})
+	grpc_simple.RegisterCalcServer(grpcServer, &grpc_simple.SimpleCalcServer{})
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatal(err)
 	}
