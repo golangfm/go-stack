@@ -3,12 +3,12 @@
 
 package grpc_simple
 
-import (
-	context "context"
-	fmt "fmt"
-	math "math"
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
-	proto "github.com/golang/protobuf/proto"
+import (
+	context "golang.org/x/net/context"
 	grpc "google.golang.org/grpc"
 )
 
@@ -21,12 +21,12 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type CalReq struct {
-	Valx                 int32    `protobuf:"varint,1,opt,name=valx,proto3" json:"valx,omitempty"`
-	Valy                 int32    `protobuf:"varint,2,opt,name=valy,proto3" json:"valy,omitempty"`
-	Op                   string   `protobuf:"bytes,3,opt,name=op,proto3" json:"op,omitempty"`
+	Valx                 *int32   `protobuf:"varint,1,req,name=valx" json:"valx,omitempty"`
+	Valy                 *int32   `protobuf:"varint,2,req,name=valy" json:"valy,omitempty"`
+	Op                   *int32   `protobuf:"varint,3,req,name=op" json:"op,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -36,17 +36,16 @@ func (m *CalReq) Reset()         { *m = CalReq{} }
 func (m *CalReq) String() string { return proto.CompactTextString(m) }
 func (*CalReq) ProtoMessage()    {}
 func (*CalReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_19d0cca94bb3180a, []int{0}
+	return fileDescriptor_calculation_bc9e9918a59f5571, []int{0}
 }
-
 func (m *CalReq) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CalReq.Unmarshal(m, b)
 }
 func (m *CalReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CalReq.Marshal(b, m, deterministic)
 }
-func (m *CalReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CalReq.Merge(m, src)
+func (dst *CalReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CalReq.Merge(dst, src)
 }
 func (m *CalReq) XXX_Size() int {
 	return xxx_messageInfo_CalReq.Size(m)
@@ -58,28 +57,28 @@ func (m *CalReq) XXX_DiscardUnknown() {
 var xxx_messageInfo_CalReq proto.InternalMessageInfo
 
 func (m *CalReq) GetValx() int32 {
-	if m != nil {
-		return m.Valx
+	if m != nil && m.Valx != nil {
+		return *m.Valx
 	}
 	return 0
 }
 
 func (m *CalReq) GetValy() int32 {
-	if m != nil {
-		return m.Valy
+	if m != nil && m.Valy != nil {
+		return *m.Valy
 	}
 	return 0
 }
 
-func (m *CalReq) GetOp() string {
-	if m != nil {
-		return m.Op
+func (m *CalReq) GetOp() int32 {
+	if m != nil && m.Op != nil {
+		return *m.Op
 	}
-	return ""
+	return 0
 }
 
 type CalRes struct {
-	Result               int32    `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result               *int32   `protobuf:"varint,1,req,name=result" json:"result,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -89,17 +88,16 @@ func (m *CalRes) Reset()         { *m = CalRes{} }
 func (m *CalRes) String() string { return proto.CompactTextString(m) }
 func (*CalRes) ProtoMessage()    {}
 func (*CalRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_19d0cca94bb3180a, []int{1}
+	return fileDescriptor_calculation_bc9e9918a59f5571, []int{1}
 }
-
 func (m *CalRes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CalRes.Unmarshal(m, b)
 }
 func (m *CalRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CalRes.Marshal(b, m, deterministic)
 }
-func (m *CalRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CalRes.Merge(m, src)
+func (dst *CalRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CalRes.Merge(dst, src)
 }
 func (m *CalRes) XXX_Size() int {
 	return xxx_messageInfo_CalRes.Size(m)
@@ -111,8 +109,8 @@ func (m *CalRes) XXX_DiscardUnknown() {
 var xxx_messageInfo_CalRes proto.InternalMessageInfo
 
 func (m *CalRes) GetResult() int32 {
-	if m != nil {
-		return m.Result
+	if m != nil && m.Result != nil {
+		return *m.Result
 	}
 	return 0
 }
@@ -120,22 +118,6 @@ func (m *CalRes) GetResult() int32 {
 func init() {
 	proto.RegisterType((*CalReq)(nil), "grpc.simple.CalReq")
 	proto.RegisterType((*CalRes)(nil), "grpc.simple.CalRes")
-}
-
-func init() { proto.RegisterFile("calculation.proto", fileDescriptor_19d0cca94bb3180a) }
-
-var fileDescriptor_19d0cca94bb3180a = []byte{
-	// 156 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4c, 0x4e, 0xcc, 0x49,
-	0x2e, 0xcd, 0x49, 0x2c, 0xc9, 0xcc, 0xcf, 0xd3, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4e,
-	0x2f, 0x2a, 0x48, 0xd6, 0x2b, 0xce, 0xcc, 0x2d, 0xc8, 0x49, 0x55, 0x72, 0xe0, 0x62, 0x73, 0x4e,
-	0xcc, 0x09, 0x4a, 0x2d, 0x14, 0x12, 0xe2, 0x62, 0x29, 0x4b, 0xcc, 0xa9, 0x90, 0x60, 0x54, 0x60,
-	0xd4, 0x60, 0x0d, 0x02, 0xb3, 0xa1, 0x62, 0x95, 0x12, 0x4c, 0x70, 0xb1, 0x4a, 0x21, 0x3e, 0x2e,
-	0xa6, 0xfc, 0x02, 0x09, 0x66, 0x05, 0x46, 0x0d, 0xce, 0x20, 0xa6, 0xfc, 0x02, 0x25, 0x05, 0xa8,
-	0x09, 0xc5, 0x42, 0x62, 0x5c, 0x6c, 0x45, 0xa9, 0xc5, 0xa5, 0x39, 0x25, 0x50, 0x33, 0xa0, 0x3c,
-	0x23, 0x2b, 0x2e, 0x16, 0xe7, 0xc4, 0x9c, 0x64, 0x21, 0x23, 0x28, 0x2d, 0xac, 0x87, 0xe4, 0x02,
-	0x3d, 0x88, 0xf5, 0x52, 0x58, 0x04, 0x8b, 0x95, 0x18, 0x92, 0xd8, 0xc0, 0x6e, 0x36, 0x06, 0x04,
-	0x00, 0x00, 0xff, 0xff, 0x72, 0x39, 0xf0, 0x97, 0xc8, 0x00, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -208,4 +190,20 @@ var _Calc_serviceDesc = grpc.ServiceDesc{
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "calculation.proto",
+}
+
+func init() { proto.RegisterFile("calculation.proto", fileDescriptor_calculation_bc9e9918a59f5571) }
+
+var fileDescriptor_calculation_bc9e9918a59f5571 = []byte{
+	// 148 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4c, 0x4e, 0xcc, 0x49,
+	0x2e, 0xcd, 0x49, 0x2c, 0xc9, 0xcc, 0xcf, 0xd3, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4e,
+	0x2f, 0x2a, 0x48, 0xd6, 0x2b, 0xce, 0xcc, 0x2d, 0xc8, 0x49, 0x55, 0x72, 0xe0, 0x62, 0x73, 0x4e,
+	0xcc, 0x09, 0x4a, 0x2d, 0x14, 0x12, 0xe2, 0x62, 0x29, 0x4b, 0xcc, 0xa9, 0x90, 0x60, 0x54, 0x60,
+	0xd2, 0x60, 0x0d, 0x02, 0xb3, 0xa1, 0x62, 0x95, 0x12, 0x4c, 0x70, 0xb1, 0x4a, 0x21, 0x3e, 0x2e,
+	0xa6, 0xfc, 0x02, 0x09, 0x66, 0xb0, 0x08, 0x53, 0x7e, 0x81, 0x92, 0x02, 0xd4, 0x84, 0x62, 0x21,
+	0x31, 0x2e, 0xb6, 0xa2, 0xd4, 0xe2, 0xd2, 0x9c, 0x12, 0xa8, 0x19, 0x50, 0x9e, 0x91, 0x15, 0x17,
+	0x8b, 0x73, 0x62, 0x4e, 0xb2, 0x90, 0x11, 0x94, 0x16, 0xd6, 0x43, 0x72, 0x81, 0x1e, 0xc4, 0x7a,
+	0x29, 0x2c, 0x82, 0xc5, 0x4a, 0x0c, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0xb1, 0x08, 0x61, 0x4d,
+	0xc0, 0x00, 0x00, 0x00,
 }
