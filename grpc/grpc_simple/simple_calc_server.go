@@ -27,5 +27,5 @@ func (a *SimpleCalcServer) Calc(ctx context.Context, req *CalReq) (*CalRes, erro
 	default:
 		return nil, errors.New("unsupport op.")
 	}
-	return &CalRes{Result: result}, nil
+	return &CalRes{Result: &result}, nil
 }
