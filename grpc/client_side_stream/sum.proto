@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package client.side.stream;
+
+message Req {
+    required int32 val = 1;
+}
+
+message Res {
+    required int32 result = 1;
+}
+
+service Calc {
+    rpc Sum(stream Req) returns (Res) {}
+}
