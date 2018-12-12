@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package both.stream;
+
+message Req {
+    required string input = 1;
+}
+
+message Res {
+    required string output = 1;
+}
+
+service Chat {
+    rpc BidStream(stream Req) returns (stream Res) {}
+}
