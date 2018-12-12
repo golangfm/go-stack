@@ -12,7 +12,7 @@ func (s *SumService) Sum(cs Calc_SumServer) error {
 	for {
 		rawData, err := cs.Recv()
 		if err == io.EOF {
-			cs.SendAndClose(&Res{Result: &sum})
+			return cs.SendAndClose(&Res{Result: &sum})
 		}
 		if err != nil {
 			return err
